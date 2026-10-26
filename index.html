@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CLASSIFIED</title>
+<link rel="stylesheet" href="styles.css">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
+</head>
+<body>
+<div id="world-container"><canvas id="world-canvas"></canvas></div>
+<div id="danger"></div>
+
+<div id="hud" hidden>
+  <div id="hud-nb">NOTEBOOKS: 0 / 7</div>
+  <div id="hud-obj"></div>
+  <div id="prompt"></div>
+  <div id="toast"></div>
+  <div id="bottom">
+    <div id="slots">
+      <div class="slot" data-i="0"><b>1</b><span></span></div>
+      <div class="slot" data-i="1"><b>2</b><span></span></div>
+      <div class="slot" data-i="2"><b>3</b><span></span></div>
+    </div>
+    <div id="stam"><i id="stam-fill"></i></div>
+  </div>
+</div>
+
+<section class="screen" id="error" hidden>
+  <div class="panel"><h2>WEBGL REQUIRED</h2><p>This browser cannot create a 3D context. Try a current desktop version of Chrome, Firefox, Edge or Safari with hardware acceleration enabled.</p></div>
+</section>
+
+<section class="screen backdrop" id="menu" hidden>
+  <div class="panel">
+    <h1 id="title">CLASSIFIED</h1>
+    <p class="tag">YOUR EDUCATION IS UNDER REVIEW.</p>
+    <button id="btn-new">NEW SESSION</button>
+    <button id="btn-continue" hidden>CONTINUE</button>
+    <button id="btn-settings">SETTINGS</button>
+    <button id="btn-credits">CREDITS</button>
+    <p class="ver">VERSION 1.0</p>
+  </div>
+</section>
+
+<section class="screen dark" id="settings" hidden>
+  <div class="panel">
+    <h2>SETTINGS</h2>
+    <label>MASTER VOLUME <output id="out-volume"></output><input id="set-volume" type="range" min="0" max="100" step="1"></label>
+    <label>MOUSE SENSITIVITY <output id="out-sens"></output><input id="set-sens" type="range" min="0.3" max="2.5" step="0.05"></label>
+    <label>CAMERA FOV <output id="out-fov"></output><input id="set-fov" type="range" min="60" max="100" step="1"></label>
+    <label>GRAPHICS QUALITY
+      <select id="set-quality"><option value="low">LOW</option><option value="medium">MEDIUM</option><option value="high">HIGH</option></select>
+    </label>
+    <button id="btn-settings-back">BACK</button>
+  </div>
+</section>
+
+<section class="screen dark" id="credits" hidden>
+  <div class="panel">
+    <h2>CREDITS</h2>
+    <p>Original design, code, textures, characters and procedural audio.</p>
+    <p>Rendering: Three.js r160 (MIT license).</p>
+    <p>Not affiliated with any other title.</p>
+    <button id="btn-credits-back">BACK</button>
+  </div>
+</section>
+
+<section class="screen dark" id="briefing" hidden>
+  <div class="panel">
+    <h2>ORIENTATION</h2>
+    <p>Find 7 notebooks. Answer the questions. Do not be caught. Leave.</p>
+    <p class="keys">WASD MOVE &nbsp; SHIFT SPRINT &nbsp; MOUSE LOOK<br>E INTERACT &nbsp; 1-3 USE ITEM &nbsp; ESC PAUSE</p>
+    <button id="btn-begin">CLICK TO BEGIN</button>
+  </div>
+</section>
+
+<section class="screen dark" id="pause" hidden>
+  <div class="panel">
+    <h2>PAUSED</h2>
+    <button id="btn-resume">RESUME</button>
+    <button id="btn-pause-settings">SETTINGS</button>
+    <button id="btn-pause-menu">MAIN MENU</button>
+  </div>
+</section>
+
+<section class="screen dark" id="worksheet" hidden>
+  <div class="paper" id="ws-panel">
+    <div class="ws-head"><span id="ws-title"></span><span id="ws-count"></span></div>
+    <div id="ws-question"></div>
+    <input id="ws-answer" type="text" inputmode="numeric" autocomplete="off" aria-label="Answer">
+    <button id="btn-submit">SUBMIT</button>
+    <div id="ws-feedback" role="status"></div>
+  </div>
+</section>
+
+<section class="screen failure" id="failure" hidden>
+  <div class="panel">
+    <h2>DETENTION</h2>
+    <p id="fail-stats"></p>
+    <button id="btn-retry">RESTART</button>
+    <button id="btn-fail-menu">MAIN MENU</button>
+  </div>
+</section>
+
+<section class="screen victory" id="victory" hidden>
+  <div class="panel">
+    <h2>DISMISSED</h2>
+    <p>You walked out. The doors stayed open behind you. Nobody called your name.</p>
+    <p id="win-stats"></p>
+    <button id="btn-again">RESTART</button>
+    <button id="btn-win-menu">MAIN MENU</button>
+  </div>
+</section>
+
+<div id="scanlines"></div>
+<script type="module" src="scripts/main.js"></script>
+</body>
+</html>
